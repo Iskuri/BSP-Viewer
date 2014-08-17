@@ -2,9 +2,9 @@
 
 ini_set('memory_limit','2048M');
 
-//$fileHandler = fopen("/home/christopher/NetBeansProjects/BSPGraphics/gm_flatgrass.bsp","r");
+$fileHandler = fopen("/home/christopher/NetBeansProjects/BSPGraphics/gm_flatgrass.bsp","r");
 //$fileHandler = fopen("/home/christopher/NetBeansProjects/BSPGraphics/gm_construct.bsp","r");
-$fileHandler = fopen("/home/christopher/NetBeansProjects/BSPGraphics/ctf_2fort.bsp","r");
+//$fileHandler = fopen("/home/christopher/NetBeansProjects/BSPGraphics/ctf_2fort.bsp","r");
 
 $ident = bytesBetween(0,4);
 $version = bytesBetween(4,8);
