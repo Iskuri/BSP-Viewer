@@ -3,8 +3,11 @@
 ini_set('memory_limit','2048M');
 
 $fileHandler = fopen("/home/christopher/NetBeansProjects/BSPGraphics/gm_flatgrass.bsp","r");
+//$fileHandler = fopen("/home/christopher/NetBeansProjects/BSPGraphics/d1_trainstation_01.bsp","r");
 //$fileHandler = fopen("/home/christopher/NetBeansProjects/BSPGraphics/gm_construct.bsp","r");
+//$fileHandler = fopen("/home/christopher/NetBeansProjects/BSPGraphics/gm_construct_flatgrass_v5.bsp","r");
 //$fileHandler = fopen("/home/christopher/NetBeansProjects/BSPGraphics/ctf_2fort.bsp","r");
+//$fileHandler = fopen("/home/christopher/NetBeansProjects/BSPGraphics/cs_office.bsp","r");
 
 $ident = bytesBetween(0,4);
 $version = bytesBetween(4,8);
@@ -46,29 +49,6 @@ foreach($faces as $face) {
 	
 	$firstEdge = $face['firstEdge'];
 
-//	echo ($face['numEdges'])."\n";
-
-	$edgesToUse = $face['numEdges'];
-	
-//	while($edgesToUse % 3) {
-//		$edgesToUse--;
-//	}
-	
-//	for($i = 0 ; $i < ($edgesToUse/3) ; $i++) {
-//		
-//		for($j = 0 ; $j < 3 ; $j++) {
-//
-//			$surfEdge = $surfEdges[$i+$firstEdge];
-//			$surfEdge = abs($surfEdge);
-//			$startPoint = $vertices[$edges[$surfEdge][0]];
-//			$startPoint = $vertices[$edges[$surfEdge][0]];
-//		
-//			
-//			
-//		}
-//		
-//	}
-	
 	for($i = 0 ; $i < $face['numEdges']; $i++) {
 		
 			$surfEdge = $surfEdges[$i+$firstEdge];

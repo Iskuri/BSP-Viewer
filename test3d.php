@@ -12,10 +12,12 @@
 //	var yPos = 1000;
 //	var zPos = 500;
 	var xPos = 0;
-	var yPos = 33;
+	var yPos = -130;
+//	var yPos = 0;
 	var zPos = 0;
 	var scene = null;
 	var renderer = null;
+	var linesToDo = [];
 
 	function getNormal(vector) {
 		sum = vector[0]+vector[1]+vector[2];
@@ -24,7 +26,33 @@
 	}
 
 	function render() {
-		console.log("animating");
+//		console.log("animating");
+		
+		var goCounter = 0;
+		
+		while(linesToDo.length > 0) {
+			
+			console.log("Popping");
+			
+			var material = new THREE.LineBasicMaterial({
+				color: 0xFFFFFF
+			});
+
+			obj = linesToDo.shift();
+//			obj = linesToDo.pop();
+			var geometry = new THREE.Geometry();
+			geometry.vertices.push(new THREE.Vector3(obj.start[0], obj.start[2], obj.start[1]));
+			geometry.vertices.push(new THREE.Vector3(obj.end[0], obj.end[2], obj.end[1]));
+
+			var line = new THREE.Line(geometry, material);
+			scene.add(line);
+			
+			goCounter++;
+			
+			if(goCounter > 100) {
+				break;
+			}
+		}
 		
 		
 		renderer.render(scene, camera);
@@ -38,8 +66,8 @@
 		scene = new THREE.Scene();
 		renderer = new THREE.WebGLRenderer();
 
-
-		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
+//		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
+		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
 		camera.position.set(xPos, yPos, zPos);
 		camera.lookAt(new THREE.Vector3(xAim, yAim, zAim));
 		var projector = new THREE.Projector();
@@ -71,31 +99,31 @@
 				
 				console.log("Loaded JSON");
 				
-				var material = new THREE.LineBasicMaterial({
-					color: 0xFFFFFF
-				});
+				
 				
 				var counter = 0;
 				
-				$.each(json, function(key, obj) {
-					
-					var geometry = new THREE.Geometry();
-					geometry.vertices.push(new THREE.Vector3(obj.start[0], obj.start[2], obj.start[1]));
-					geometry.vertices.push(new THREE.Vector3(obj.end[0], obj.end[2], obj.end[1]));
-//					geometry.vertices.push(new THREE.Vector3(100, 100, 1000));
-					
-//					camera.lookAt(new THREE.Vector3(obj.start[0], obj.start[1], obj.start[2]));
-					
-					var line = new THREE.Line(geometry, material);
-					scene.add(line);
-					
-					counter++;
-
-					if(counter > 10) {
-//						return false;
-					}
-					
-				});
+				linesToDo = json;
+				
+//				$.each(json, function(key, obj) {
+//					
+//					var geometry = new THREE.Geometry();
+//					geometry.vertices.push(new THREE.Vector3(obj.start[0], obj.start[2], obj.start[1]));
+//					geometry.vertices.push(new THREE.Vector3(obj.end[0], obj.end[2], obj.end[1]));
+////					geometry.vertices.push(new THREE.Vector3(100, 100, 1000));
+//					
+////					camera.lookAt(new THREE.Vector3(obj.start[0], obj.start[1], obj.start[2]));
+//					
+//					var line = new THREE.Line(geometry, material);
+//					scene.add(line);
+//					
+//					counter++;
+//
+//					if(counter > 10) {
+////						return false;
+//					}
+//					
+//				});
 				
 				renderer.render(scene, camera);
 
